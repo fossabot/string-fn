@@ -6,7 +6,7 @@
   "main": "./dist/stringFn.cjs.js",
   "module": "./dist/stringFn.esm.js",
   "scripts": {
-    "devx": "jest __tests__/maskSentence.js --watch",
+    "devx": "jest __tests__/between.js --watch",
     "test": "jest __tests__/",
     "build": "rollup -c rollup.config.js",
     "cover": "jest --coverage",

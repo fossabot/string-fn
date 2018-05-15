@@ -1,3 +1,11 @@
+function between(str, left, rightRaw) {
+  const right = rightRaw === undefined ? left : rightRaw;
+
+  const rightIndex = str.lastIndexOf(right);
+  const leftIndex = str.indexOf(left);
+  return rightIndex === -1 ? str : str.substring(leftIndex + left.length, rightIndex).trim();
+}
+
 //Taken from https://github.com/getify/Functional-Light-JS/blob/master/ch4.md
 function compose(...fns) {
   return result => {
@@ -150,10 +158,6 @@ function toUpper(x) {
   return x.toUpperCase();
 }
 
-function between(str, left, right) {
-  return last(split(left, head(split(right, str)))).trim();
-}
-
 const WORDS = /[A-Z]?[a-z]+|[A-Z]+(?![a-z])+/g;
 const WORDS_EXTENDED = /[A-Z\xC0-\xD6\xD8-\xDEА-Я]?[a-z\xDF-\xF6\xF8-\xFFа-я]+|[A-Z\xC0-\xD6\xD8-\xDE]+(?![a-z\xDF-\xF6\xF8-\xFF])/g;
 const PUNCTUATIONSX = /[",\.\?]/g;
@@ -287,7 +291,12 @@ const addSpaceAroundPunctuation = sentence => sentence.replace(PUNCTUATIONSX, x 
  * Use shorter version of PUNCTUATIONS so_
  * cases `didn't` and `по-добри` be handled
  */
-function maskSentence({ sentence, replacer = '_', charLimit = 3, words = [] }) {
+function maskSentence({
+  sentence,
+  replacer = '_',
+  charLimit = 3,
+  words = []
+}) {
   sentence = trim$1(addSpaceAroundPunctuation(sentence));
 
   const hidden = [];

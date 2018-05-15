@@ -12,7 +12,7 @@ export function stripTags(str: string): string
 export function titleCase(str: string): string
 export function trim(str: string): string
 
-export function between(str: string, left: string, right: string): string
+export function between(str: string, left: string, right?: string): string
 export function count(str: string, substr: string): number
 export function distance(x: string, y: string): number
 export function distanceGerman(x: string, y: string): number

@@ -14,7 +14,12 @@ const addSpaceAroundPunctuation = sentence =>
  * Use shorter version of PUNCTUATIONS so_
  * cases `didn't` and `по-добри` be handled
  */
-export default function maskSentence ({ sentence, replacer = '_', charLimit = 3, words = [] }) {
+export default function maskSentence ({ 
+  sentence, 
+  replacer = '_', 
+  charLimit = 3, 
+  words = [] 
+}) {
   sentence = trim(addSpaceAroundPunctuation(sentence))
 
   const hidden = []

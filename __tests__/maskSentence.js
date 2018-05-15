@@ -11,6 +11,20 @@ test('English with apostrophe(\')', () => {
   expect(visible).toEqual(expectedVisible)
 })
 
+test.only('Bulgarian when first word is focus word', () => {
+  const sentence = 'Някога е имало по-добри времена'
+  const expectedVisible = [ 'Н____а', 'е', 'имало', 'по-добри', 'времена' ]
+  const expectedHidden = [ 'Някога', 'е', 'имало', 'по-добри', 'времена' ]
+
+  const { hidden, visible } = stringFn.maskSentence({ 
+    sentence,
+    words: ['Някога']  
+  })
+
+  expect(hidden).toEqual(expectedHidden)
+  expect(visible).toEqual(expectedVisible)
+})
+
 test('Bulgarian with dash(-)', () => {
   const sentence = 'Някога е имало по-добри времена'
   const expectedVisible = [ 'Н____а', 'е', 'и___о', 'п______и', 'в_____а' ]
