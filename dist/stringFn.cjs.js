@@ -124,6 +124,14 @@ function match(regex, x) {
   return willReturn === null ? [] : willReturn;
 }
 
+function merge(obj, newProps) {
+  if (newProps === undefined) {
+    return newPropsHolder => merge(obj, newPropsHolder);
+  }
+
+  return Object.assign({}, obj, newProps);
+}
+
 function replace(regex, replacer, str) {
   if (replacer === undefined) {
     return (replacerHolder, strHolder) => replace(regex, replacerHolder, strHolder);
@@ -389,6 +397,40 @@ function stripTags(str) {
   return replace(/\s+/g, ' ', replace(HTML_TAGS, ' ', str)).trim();
 }
 
+function mergeAll(arr) {
+  let willReturn = {};
+  map(val => {
+    willReturn = merge(willReturn, val);
+  }, arr);
+
+  return willReturn;
+}
+
+function mapToObject(fn, list) {
+  return mergeAll(map(fn, list));
+}
+
+function takeArguments(url) {
+  const [base, ...rawArguments] = url.split('?');
+  if (rawArguments.length === 0) return {};
+
+  return mapToObject(x => {
+    const [key, value] = x.split('=');
+    if (value === undefined || value === 'true') {
+      return { [key]: true };
+    }
+    if (value === 'false') {
+      return { [key]: false };
+    }
+
+    if (Number.isNaN(value * 1)) {
+      return { [key]: value };
+    }
+
+    return { [key]: Number(value) };
+  }, rawArguments);
+}
+
 function titleCase(str) {
   return join(' ', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, words(str)));
 }
@@ -418,6 +460,7 @@ exports.snakeCase = snakeCase;
 exports.splitSentence = splitSentence;
 exports.stripPunctuation = stripPunctuation;
 exports.stripTags = stripTags;
+exports.takeArguments = takeArguments;
 exports.titleCase = titleCase;
 exports.trim = trim$1;
 exports.words = words;

@@ -120,6 +120,14 @@ function match(regex, x) {
   return willReturn === null ? [] : willReturn;
 }
 
+function merge(obj, newProps) {
+  if (newProps === undefined) {
+    return newPropsHolder => merge(obj, newPropsHolder);
+  }
+
+  return Object.assign({}, obj, newProps);
+}
+
 function replace(regex, replacer, str) {
   if (replacer === undefined) {
     return (replacerHolder, strHolder) => replace(regex, replacerHolder, strHolder);
@@ -385,6 +393,40 @@ function stripTags(str) {
   return replace(/\s+/g, ' ', replace(HTML_TAGS, ' ', str)).trim();
 }
 
+function mergeAll(arr) {
+  let willReturn = {};
+  map(val => {
+    willReturn = merge(willReturn, val);
+  }, arr);
+
+  return willReturn;
+}
+
+function mapToObject(fn, list) {
+  return mergeAll(map(fn, list));
+}
+
+function takeArguments(url) {
+  const [base, ...rawArguments] = url.split('?');
+  if (rawArguments.length === 0) return {};
+
+  return mapToObject(x => {
+    const [key, value] = x.split('=');
+    if (value === undefined || value === 'true') {
+      return { [key]: true };
+    }
+    if (value === 'false') {
+      return { [key]: false };
+    }
+
+    if (Number.isNaN(value * 1)) {
+      return { [key]: value };
+    }
+
+    return { [key]: Number(value) };
+  }, rawArguments);
+}
+
 function titleCase(str) {
   return join(' ', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, words(str)));
 }
@@ -393,4 +435,4 @@ function words$1(str) {
   return match(WORDS_EXTENDED, str);
 }
 
-export { between, camelCase, count, distance, distanceGerman, glob, indent, kebabCase, camelCase$1 as dotCase, pascalCase, maskSentence, maskWords, constantCase, removeIndent, reverse$1 as reverse, seoTitle, shuffle, snakeCase, splitSentence, stripPunctuation, stripTags, titleCase, trim$1 as trim, words, words$1 as wordsX };
+export { between, camelCase, count, distance, distanceGerman, glob, indent, kebabCase, camelCase$1 as dotCase, pascalCase, maskSentence, maskWords, constantCase, removeIndent, reverse$1 as reverse, seoTitle, shuffle, snakeCase, splitSentence, stripPunctuation, stripTags, takeArguments, titleCase, trim$1 as trim, words, words$1 as wordsX };
