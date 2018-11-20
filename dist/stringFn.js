@@ -1,3 +1,7 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
 function between(str, left, rightRaw) {
   const right = rightRaw === undefined ? left : rightRaw;
 
@@ -277,5 +281,30 @@ function words$1(str) {
   return match(WORDS_EXTENDED, str);
 }
 
-export { between, camelCase, count, distance, distanceGerman, glob, indent, kebabCase, camelCase$1 as dotCase, pascalCase, maskSentence, maskWords, constantCase, removeIndent, reverse$1 as reverse, seoTitle, shuffle, snakeCase, splitSentence, stripPunctuation, stripTags, takeArguments, titleCase, trim$1 as trim, words, words$1 as wordsX };
-//# sourceMappingURL=stringFn.esm.js.map
+exports.between = between;
+exports.camelCase = camelCase;
+exports.count = count;
+exports.distance = distance;
+exports.distanceGerman = distanceGerman;
+exports.glob = glob;
+exports.indent = indent;
+exports.kebabCase = kebabCase;
+exports.dotCase = camelCase$1;
+exports.pascalCase = pascalCase;
+exports.maskSentence = maskSentence;
+exports.maskWords = maskWords;
+exports.constantCase = constantCase;
+exports.removeIndent = removeIndent;
+exports.reverse = reverse$1;
+exports.seoTitle = seoTitle;
+exports.shuffle = shuffle;
+exports.snakeCase = snakeCase;
+exports.splitSentence = splitSentence;
+exports.stripPunctuation = stripPunctuation;
+exports.stripTags = stripTags;
+exports.takeArguments = takeArguments;
+exports.titleCase = titleCase;
+exports.trim = trim$1;
+exports.words = words;
+exports.wordsX = words$1;
+//# sourceMappingURL=stringFn.js.map

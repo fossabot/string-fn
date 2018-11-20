@@ -1,31 +1,28 @@
-import resolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
-import packageJson from './package.json'
+import resolve from 'rollup-plugin-node-resolve'
 
 export default {
-  input: 'src/stringFn.js',
-  output: [
+  input    : './src/stringFn.js',
+  plugins  : [
+    resolve(), 
+    babel({exclude: 'node_modules/**'}) 
+  ],
+  output   : [
     {
-      file   : packageJson.main,
+      sourcemap: true,
+      file   : './dist/stringFn.js',
       format : 'cjs',
     },
     {
-      file   : packageJson.module,
+      sourcemap: true,
+      file   : './dist/stringFn.esm.js',
       format : 'es',
     },
     {
+      sourcemap: false,
       file   : 'webVersion.js',
       format : 'umd',
       name   : 'StringFn',
     }
-  ],
-  legacy: false,
-  treeshake: true,
-  externalHelpers: false,
-  plugins: [
-    resolve(),
-    babel({
-      exclude: 'node_modules/**'
-    })
   ]
 }

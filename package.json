@@ -3,7 +3,7 @@
   "version": "1.7.0",
   "typings": "./index.d.ts",
   "description": "String manipulation library",
-  "main": "./dist/stringFn.cjs.js",
+  "main": "./dist/stringFn.js",
   "module": "./dist/stringFn.esm.js",
   "scripts": {
     "devx": "jest __tests__/takeArguments.js --watch",
@@ -31,13 +31,20 @@
   "homepage": "https://selfrefactor.github.io/string-fn",
   "homepage__": "https://github.com/selfrefactor/string-fn#readme",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-annotate-pure-calls": "^0.2.2",
+    "babel-plugin-external-helpers": "^7.0.0-beta.3",
     "babel-preset-env": "^1.6.1",
-    "jest": "^22.1.0",
-    "rollup": "^0.63.0",
+    "commit-message": "https://github.com/selfrefactor/commit-message#3.0.1",
+    "do": "https://github.com/selfrefactor/do#1.8.4",
+    "fs-extra": "^7.0.0",
+    "minify": "https://github.com/selfrefactor/minify#0.1.0",
+    "rambda": "^1.2.6",
+    "rambda-repl": "https://github.com/selfrefactor/rambda-repl#0.3.0",
+    "rollup": "^0.57.1",
     "rollup-plugin-babel": "^3.0.2",
-    "rollup-plugin-node-resolve": "^3.0.0"
+    "rollup-plugin-node-resolve": "^3.0.2",
+    "jest": "^22.1.0"
   },
   "dependencies": {
     "rambda": "^1.2.6"

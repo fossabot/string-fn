@@ -1,7 +1,16 @@
 {
   "env": {
     "development": {
-      "plugins": ["external-helpers"]
+      "presets": [
+        ["env", {
+          "targets": {"node": "current"},
+          "modules" : false
+        }]
+      ],
+      "plugins": [
+        "external-helpers",
+        "annotate-pure-calls"
+      ]
     },
     "test": {
       "presets": [
