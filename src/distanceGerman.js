@@ -4,14 +4,14 @@ import {
   join,
   toLower,
 } from 'rambda'
-import distance from './distance'
+import { distance } from './distance'
 
 const normalizeGermanChar = char => {
   const arr = [ 'ä', 'ö', 'ü', 'ß' ]
   const normalizedArr = [ 'a', 'o', 'u', 'ss' ]
   const foundIndex = arr.indexOf(char)
 
-  if (foundIndex === -1) {
+  if (foundIndex === -1){
     return char
   }
 
@@ -26,6 +26,6 @@ const normalizeGermanWord = str => join(
   )
 )
 
-export default function distanceGerman (a, b) {
+export function distanceGerman(a, b){
   return distance(normalizeGermanWord(a), normalizeGermanWord(b))
 }

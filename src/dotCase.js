@@ -3,10 +3,9 @@ import {
   map,
   toLower,
 } from 'rambda'
+import { words } from './words'
 
-import words from './words'
-
-export default function camelCase (str) {
+export function dotCase(str){
   return join(
     '.',
     map(

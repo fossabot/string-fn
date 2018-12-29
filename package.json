@@ -6,8 +6,7 @@
   "main": "./dist/stringFn.js",
   "module": "./dist/stringFn.esm.js",
   "scripts": {
-    "devx": "jest __tests__/takeArguments.js --watch",
-    "test": "jest __tests__/",
+    "test": "jest",
     "build": "rollup -c rollup.config.js",
     "cover": "jest --coverage",
     "docs": "docsify init ./docs"
@@ -48,5 +47,8 @@
   },
   "dependencies": {
     "rambda": "^1.2.6"
+  },
+  "commitMessage": {
+    "workInProgress": "refactor to rambdax src pattern"
   }
 }

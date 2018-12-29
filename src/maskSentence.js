@@ -21,8 +21,8 @@ export default function maskSentence ({
   words = [] 
 }) {
   sentence = trim(addSpaceAroundPunctuation(sentence))
-
-  const hidden = []
+  console.log('sentence',  sentence)
+   const hidden = []
   const visible = []
 
   map(

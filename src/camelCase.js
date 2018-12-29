@@ -7,9 +7,9 @@ import {
   tail,
 } from 'rambda'
 
-import words from './words'
+import { words } from './words'
 
-export default function camelCase (str) {
+export function camelCase(str){
   const result = join(
     '',
     map(
