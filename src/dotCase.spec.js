@@ -1,4 +1,4 @@
-import {dotCase} from './dotCase'
+import { dotCase } from './dotCase'
 
 test('happy', () => {
   const result = dotCase('foo bar BAZ')

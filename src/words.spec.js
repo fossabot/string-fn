@@ -1,14 +1,14 @@
-import * as stringFn from '../src/stringFn'
+import { words } from './words'
 
 test('', () => {
-  const result = stringFn.words('fooBarBAZ')
+  const result = words('fooBarBAZ')
   const expectedResult = [ 'foo', 'Bar', 'BAZ' ]
 
   expect(result).toEqual(expectedResult)
 })
 
 test('doesn\'t work with German', () => {
-  const result = stringFn.words('fooBärBAZ')
+  const result = words('fooBärBAZ')
   const expectedResult = [ 'foo', 'B', 'r', 'BAZ' ]
 
   expect(result).toEqual(expectedResult)

@@ -1,8 +1,8 @@
-import * as stringFn from '../src/stringFn'
+import { titleCase } from './titleCase'
 
 test('', () => {
   const str = 'foo bar BAZ'
-  const result = stringFn.titleCase(str)
+  const result = titleCase(str)
   const expectedResult = 'Foo Bar Baz'
 
   expect(result).toEqual(expectedResult)
@@ -10,7 +10,7 @@ test('', () => {
 
 test('', () => {
   const str = 'fooBar_BAZ'
-  const result = stringFn.titleCase(str)
+  const result = titleCase(str)
   const expectedResult = 'Foo Bar Baz'
 
   expect(result).toEqual(expectedResult)

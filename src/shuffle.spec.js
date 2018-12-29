@@ -1,8 +1,8 @@
-import * as stringFn from '../src/stringFn'
+import { shuffle } from './shuffle'
 
 test('', () => {
   const str = 'fooBarBazIammorethantag'
-  const result = stringFn.shuffle(str)
+  const result = shuffle(str)
 
   expect(result).not.toEqual(str)
   expect(str.length).toEqual(result.length)

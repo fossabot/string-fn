@@ -1,9 +1,7 @@
 import { HTML_TAGS } from './internals/constants'
-import {
-  replace,
-} from 'rambda'
+import { replace } from 'rambda'
 
-export default function stripTags (str) {
+export function stripTags(str){
   return replace(
     /\s+/g,
     ' ',

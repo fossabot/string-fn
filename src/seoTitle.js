@@ -6,14 +6,14 @@ import {
   head,
   tail,
 } from 'rambda'
+import { words } from './words'
 
-import words from './words'
-export default function seoTitle (str, limit = 3) {
+export function seoTitle(str, limit = 3){
   const result = join(
     ' ',
     map(
       val => {
-        if (val.length >= limit) {
+        if (val.length >= limit){
           return `${ toUpper(head(val)) }${ toLower(tail(val)) }`
         }
 

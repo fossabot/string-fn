@@ -6,15 +6,15 @@ import {
 
 import { PUNCTUATIONSX } from './constants'
 
-export default function maskWordHelper (word, replacer, charLimit) {
+export function maskWordHelper(word, replacer, charLimit){
   if (
     test(PUNCTUATIONSX, word) ||
     word.length <= 2
-  ) {
+  ){
     return word
   }
 
-  if (word.length < charLimit) {
+  if (word.length < charLimit){
     return `${ head(word) }${ replacer.repeat(word.length - 1) }`
   }
 

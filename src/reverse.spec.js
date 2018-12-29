@@ -1,8 +1,8 @@
-import * as stringFn from '../src/stringFn'
+import { reverse } from './reverse'
 
 test('', () => {
   const str = 'fooBarBaz'
-  const result = stringFn.reverse(str)
+  const result = reverse(str)
   const expectedResult = 'zaBraBoof'
 
   expect(result).toEqual(expectedResult)

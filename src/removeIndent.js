@@ -4,7 +4,7 @@ import {
   split,
 } from 'rambda'
 
-export default function removeIndent (str) {
+export function removeIndent(str){
   return join(
     '\n',
     map(

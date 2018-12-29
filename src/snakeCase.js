@@ -2,9 +2,9 @@ import {
   toLower,
   join,
 } from 'rambda'
-import words from './words'
+import { words } from './words'
 
-export default function snakeCase (str) {
+export function snakeCase(str){
   return toLower(
     join(
       '_',

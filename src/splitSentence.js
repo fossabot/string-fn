@@ -1,7 +1,5 @@
-import {
-  split,
-} from 'rambda'
-import trim from './trim'
+import { split } from 'rambda'
+import { trim } from './trim'
 import { PUNCTUATIONS } from './internals/constants'
 
 const addSpaceAroundPunctuation = sentence =>
@@ -10,7 +8,7 @@ const addSpaceAroundPunctuation = sentence =>
     match => ` ${ match } `
   )
 
-export default function splitSentence (sentence) {
+export function splitSentence(sentence){
   return split(
     ' ',
     trim(

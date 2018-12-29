@@ -1,11 +1,6 @@
-import {
-  replace,
-} from 'rambda'
+import { replace } from 'rambda'
+import { PUNCTUATIONS } from './internals/constants'
 
-import {
-  PUNCTUATIONS,
-} from './internals/constants'
-
-export default function stripPunctuation (str) {
+export function stripPunctuation(str){
   return replace(PUNCTUATIONS, '', str)
 }

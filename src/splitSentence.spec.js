@@ -1,8 +1,8 @@
-import * as stringFn from '../src/stringFn'
+import { splitSentence } from './splitSentence'
 
 test('', () => {
   const str = 'in my   , time of-dying, when nobody.'
-  const result = stringFn.splitSentence(str)
+  const result = splitSentence(str)
   const expectedResult = [
     'in',
     'my',

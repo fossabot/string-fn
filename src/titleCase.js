@@ -6,9 +6,9 @@ import {
   toLower,
   tail,
 } from 'rambda'
-import words from './words'
+import { words } from './words'
 
-export default function titleCase (str) {
+export function titleCase(str){
   return join(
     ' ',
     map(

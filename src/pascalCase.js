@@ -6,10 +6,9 @@ import {
   toLower,
   tail,
 } from 'rambda'
+import { words } from './words'
 
-import words from './words'
-
-export default function pascalCase (str) {
+export function pascalCase(str){
   return join(
     '',
     map(

@@ -4,7 +4,7 @@ import {
   split,
 } from 'rambda'
 
-export default function indent (str, indentCount) {
+export function indent(str, indentCount){
   return join(
     '\n',
     map(

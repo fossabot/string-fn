@@ -1,7 +1,7 @@
-import * as stringFn from '../src/stringFn'
+import { pascalCase } from './pascalCase'
 
 test('', () => {
-  const result = stringFn.pascalCase('foo bar BAZ')
+  const result = pascalCase('foo bar BAZ')
   const expected = 'FooBarBaz'
 
   expect(

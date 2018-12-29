@@ -5,7 +5,7 @@ import {
 
 const shuffleArr = arr => {
   let counter = arr.length
-  while (counter > 0) {
+  while (counter > 0){
     const index = Math.floor(Math.random() * counter)
     counter--
     const temp = arr[ counter ]
@@ -16,7 +16,7 @@ const shuffleArr = arr => {
   return arr
 }
 
-export default function shuffle (str) {
+export function shuffle(str){
   return join(
     '',
     shuffleArr(

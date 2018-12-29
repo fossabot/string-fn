@@ -49,6 +49,6 @@
     "rambda": "^1.2.6"
   },
   "commitMessage": {
-    "workInProgress": "refactor to rambdax src pattern"
+    "workInProgress": ""
   }
 }
