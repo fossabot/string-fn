@@ -9,10 +9,11 @@
 
     const rightIndex = str.lastIndexOf(right);
     const leftIndex = str.indexOf(left);
+
     return rightIndex === -1 ? str : str.substring(leftIndex + left.length, rightIndex).trim();
   }
 
-  function compose(...fns){return(...args)=>{const h1=fns.slice();if(h1.length>0){const fn=h1.pop();let j1=fn(...args);while(h1.length>0){j1=h1.pop()(j1);}return j1;}return void 0;};}function drop(L1,x){if(arguments.length===1){return M1=>drop(L1,M1);}return x.slice(L1);}function mapObject(fn,i2){const j2={};for(const k2 in i2){j2[k2]=fn(i2[k2],k2);}return j2;}function map(fn,m2){if(arguments.length===1){return n2=>map(fn,n2);}if(m2===void 0){return[];}if(!Array.isArray(m2)){return mapObject(fn,m2);}let o2=-1;const p2=m2.length,q2=Array(p2);while(++o2<p2){q2[o2]=fn(m2[o2]);}return q2;}function head(a){if(typeof a==='string'){return a[0]||'';}return a[0];}function baseSlice(V2,W2,X2){let Y2=-1,Z2=V2.length;X2=X2>Z2?Z2:X2;if(X2<0){X2+=Z2;}Z2=W2>X2?0:X2-W2>>>0;W2>>>=0;const a3=Array(Z2);while(++Y2<Z2){a3[Y2]=V2[Y2+W2];}return a3;}function init(a){if(typeof a==='string'){return a.slice(0,-1);}return a.length?baseSlice(a,0,-1):[];}function join(d3,e3){if(arguments.length===1){return f3=>join(d3,f3);}return e3.join(d3);}function last(a){if(typeof a==='string'){return a[a.length-1]||'';}return a[a.length-1];}function length(x){return x.length;}function match(l3,x){if(arguments.length===1){return m3=>match(l3,m3);}const n3=x.match(l3);return n3===null?[]:n3;}function merge(o3,p3){if(arguments.length===1){return q3=>merge(o3,q3);}return Object.assign({},o3||{},p3||{});}function replace(V4,W4,X4){if(W4===void 0){return(Y4,Z4)=>replace(V4,Y4,Z4);}else if(X4===void 0){return a5=>replace(V4,W4,a5);}return X4.replace(V4,W4);}function split(n5,o5){if(arguments.length===1)return p5=>split(n5,p5);return o5.split(n5);}function tail(x5){return drop(1,x5);}function test(G5,H5){if(arguments.length===1)return I5=>test(G5,I5);return H5.search(G5)!==-1;}function toLower(x){return x.toLowerCase();}function toUpper(x){return x.toUpperCase();}
+  function compose(...fns){return(...args)=>{const h1=fns.slice();if(h1.length>0){const fn=h1.pop();let j1=fn(...args);while(h1.length>0){j1=h1.pop()(j1);}return j1;}return void 0;};}function type(a){const l1=typeof a;if(a===null){return'Null';}else if(a===void 0){return'Undefined';}else if(l1==='boolean'){return'Boolean';}else if(l1==='number'){return'Number';}else if(l1==='string'){return'String';}else if(Array.isArray(a)){return'Array';}else if(a instanceof RegExp){return'RegExp';}const m1=a.toString();if(m1.startsWith('async')){return'Async';}else if(m1==='[object Promise]'){return'Promise';}else if(m1.includes('function')||m1.includes('=>')){return'Function';}return'Object';}function drop(L1,x){if(arguments.length===1){return M1=>drop(L1,M1);}return x.slice(L1);}function mapObject(fn,i2){const j2={};for(const k2 in i2){j2[k2]=fn(i2[k2],k2);}return j2;}function map(fn,m2){if(arguments.length===1){return n2=>map(fn,n2);}if(m2===void 0){return[];}if(!Array.isArray(m2)){return mapObject(fn,m2);}let o2=-1;const p2=m2.length,q2=Array(p2);while(++o2<p2){q2[o2]=fn(m2[o2]);}return q2;}function head(a){if(typeof a==='string'){return a[0]||'';}return a[0];}function baseSlice(V2,W2,X2){let Y2=-1,Z2=V2.length;X2=X2>Z2?Z2:X2;if(X2<0){X2+=Z2;}Z2=W2>X2?0:X2-W2>>>0;W2>>>=0;const a3=Array(Z2);while(++Y2<Z2){a3[Y2]=V2[Y2+W2];}return a3;}function init(a){if(typeof a==='string'){return a.slice(0,-1);}return a.length?baseSlice(a,0,-1):[];}function join(d3,e3){if(arguments.length===1){return f3=>join(d3,f3);}return e3.join(d3);}function last(a){if(typeof a==='string'){return a[a.length-1]||'';}return a[a.length-1];}function length(x){return x.length;}function match(l3,x){if(arguments.length===1){return m3=>match(l3,m3);}const n3=x.match(l3);return n3===null?[]:n3;}function merge(o3,p3){if(arguments.length===1){return q3=>merge(o3,q3);}return Object.assign({},o3||{},p3||{});}function partialCurry(fn,P3={}){return Q3=>{if(type(fn)==='Async'||type(fn)==='Promise'){return new Promise((R3,S3)=>{fn(merge(Q3,P3)).then(R3).catch(S3);});}return fn(merge(Q3,P3));};}function replace(V4,W4,X4){if(W4===void 0){return(Y4,Z4)=>replace(V4,Y4,Z4);}else if(X4===void 0){return a5=>replace(V4,W4,a5);}return X4.replace(V4,W4);}function split(n5,o5){if(arguments.length===1)return p5=>split(n5,p5);return o5.split(n5);}function tail(x5){return drop(1,x5);}function test(G5,H5){if(arguments.length===1)return I5=>test(G5,I5);return H5.search(G5)!==-1;}function toLower(x){return x.toLowerCase();}function toUpper(x){return x.toUpperCase();}
 
   const WORDS = /[A-Z]?[a-z]+|[A-Z]+(?![a-z])+/g;
   const WORDS_EXTENDED = /[A-Z\xC0-\xD6\xD8-\xDEА-Я]?[a-z\xDF-\xF6\xF8-\xFFа-я]+|[A-Z\xC0-\xD6\xD8-\xDE]+(?![a-z\xDF-\xF6\xF8-\xFF])/g;
@@ -41,7 +42,7 @@
     if (b.length === 0) {
       return a.length;
     }
-    let i, j, prev, val, tmp;
+    let i, j, prev, tmp, val;
 
     if (a.length > b.length) {
       tmp = a;
@@ -106,7 +107,7 @@
       return foundIndex > 0 && foundIndex + globStr.length < str.length;
     }
 
-    return str.includes(globStr);
+    return false;
   }
 
   function indent(str, indentCount) {
@@ -117,7 +118,7 @@
     return toLower(join('-', words(str)));
   }
 
-  function camelCase$1(str) {
+  function dotCase(str) {
     return join('.', map(toLower, words(str)));
   }
 
@@ -129,8 +130,54 @@
     return replace(/\s+/g, ' ', str).trim();
   }
 
-  function maskWordHelper(word, replacer, charLimit) {
-    if (test(PUNCTUATIONSX, word) || word.length <= 2) {
+  const humanLengths = {
+    5: 'Five',
+    6: 'Six',
+    7: 'Seven',
+    8: 'Eight'
+  };
+
+  const globs = {
+    easyFive: '*123*',
+    easySix: '*123**',
+    easySixR: '**234*',
+    easierSix: '*123**',
+    easierSixR: '**234*',
+    easySeven: '*1234**',
+    easySevenR: '**2345*',
+    easierSeven: '**234**',
+    easyEight: '**2345**',
+    easierEight: '**234***',
+    easierEightR: '***345**',
+    easyAny: len => `**${'-'.repeat(len - 5)}***`,
+    easierAny: len => `***${'-'.repeat(len - 6)}***`
+  };
+
+  function chance() {
+    return Math.random() > 0.49;
+  }
+
+  function getGlob(len, mode, random) {
+    if (len > 8) return globs[`${mode}Any`](len);
+    if (len === 5) return globs.easyFive;
+    const base = `${mode}${humanLengths[len]}`;
+    const maybeKey = globs[base];
+
+    if (!random) {
+      return maybeKey === undefined ? globs[`easy${humanLengths[len]}`] : maybeKey;
+    }
+
+    return globs[`${base}R`] === undefined ? maybeKey : chance() ? globs[`${base}R`] : maybeKey;
+  }
+
+  function ant(word, glob, replacer) {
+    const chars = [...word];
+
+    return chars.map((char, i) => glob[i] === '*' ? char : replacer).join('');
+  }
+
+  function maskWordHelper(word, replacer, charLimit = 4) {
+    if (test(PUNCTUATIONSX, word) || word.length <= 1) {
       return word;
     }
 
@@ -141,6 +188,22 @@
     return `${head(word)}${replacer.repeat(word.length - 2)}${last(word)}`;
   }
 
+  function maskWordHelperX({
+    word,
+    replacer = '_',
+    easyMode = false,
+    randomMode = false,
+    easierMode = false,
+    charLimit = 4
+  }) {
+    const len = word.length;
+    if (!easyMode && !easierMode || len <= 4) return maskWordHelper(word, replacer, charLimit);
+
+    const glob = getGlob(len, easyMode ? 'easy' : 'easier', randomMode);
+
+    return ant(word, glob, replacer);
+  }
+
   const addSpaceAroundPunctuation = sentence => sentence.replace(PUNCTUATIONSX, x => ` ${x} `);
 
   /**
@@ -148,27 +211,35 @@
    * cases `didn't` and `по-добри` be handled
    */
   function maskSentence({
-    sentence,
+    charLimit = 4,
+    easyMode = false,
+    easierMode = false,
+    randomMode = false,
     replacer = '_',
-    charLimit = 3,
+    sentence,
     words = []
   }) {
-    sentence = trim$1(addSpaceAroundPunctuation(sentence));
-
+    const parsed = trim$1(addSpaceAroundPunctuation(sentence));
     const hidden = [];
     const visible = [];
+    const input = {
+      replacer,
+      easyMode,
+      randomMode,
+      easierMode,
+      charLimit
+    };
+    const easyFn = partialCurry(maskWordHelperX, input);
+    const ant$$1 = easierMode || easyMode ? word => easyFn({ word }) : word => maskWordHelper(word, replacer, charLimit);
 
-    map(val => {
-      let visiblePart;
+    map(word => {
+      const ok = words.length === 0 || words.includes(word);
 
-      if (words.length === 0 || words.includes(val)) {
-        visiblePart = maskWordHelper(val, replacer, charLimit);
-      } else {
-        visiblePart = val;
-      }
-      hidden.push(val);
+      const visiblePart = ok ? ant$$1(word) : word;
+
+      hidden.push(word);
       visible.push(visiblePart);
-    }, split(' ', sentence));
+    }, split(' ', parsed));
 
     return {
       hidden,
@@ -191,7 +262,7 @@
   }
 
   function reverse$1(str) {
-    return str.split('').reverse().join('');
+    return [...str].reverse().join('');
   }
 
   function seoTitle(str, limit = 3) {
@@ -255,7 +326,7 @@
   }
 
   function takeArguments(url) {
-    const [base, ...rawArguments] = url.split('?');
+    const [, ...rawArguments] = url.split('?');
     if (rawArguments.length === 0) return {};
 
     return mapToObject(x => {
@@ -267,7 +338,7 @@
         return { [key]: false };
       }
 
-      if (Number.isNaN(value * 1)) {
+      if (Number.isNaN(Number(value))) {
         return { [key]: value };
       }
 
@@ -279,7 +350,7 @@
     return join(' ', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, words(str)));
   }
 
-  function words$1(str) {
+  function wordsX(str) {
     return match(WORDS_EXTENDED, str);
   }
 
@@ -291,7 +362,7 @@
   exports.glob = glob;
   exports.indent = indent;
   exports.kebabCase = kebabCase;
-  exports.dotCase = camelCase$1;
+  exports.dotCase = dotCase;
   exports.pascalCase = pascalCase;
   exports.maskSentence = maskSentence;
   exports.maskWords = maskWords;
@@ -308,7 +379,7 @@
   exports.titleCase = titleCase;
   exports.trim = trim$1;
   exports.words = words;
-  exports.wordsX = words$1;
+  exports.wordsX = wordsX;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
