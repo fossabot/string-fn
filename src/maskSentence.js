@@ -15,32 +15,35 @@ const addSpaceAroundPunctuation = sentence =>
  * cases `didn't` and `по-добри` be handled
  */
 export function maskSentence({
-  sentence,
-  replacer = '_',
   charLimit = 3,
+  easyMode = false,
+  replacer = '_',
+  sentence,
   words = [],
 }){
-  sentence = trim(addSpaceAroundPunctuation(sentence))
-  console.log('sentence', sentence)
+  const input = trim(addSpaceAroundPunctuation(sentence))
   const hidden = []
   const visible = []
 
   map(
     val => {
       let visiblePart
-
       if (
         words.length === 0 ||
         words.includes(val)
       ){
         visiblePart = maskWordHelper(val, replacer, charLimit)
+        console.log({
+          val,
+          visiblePart,
+        })
       } else {
         visiblePart = val
       }
       hidden.push(val)
       visible.push(visiblePart)
     },
-    split(' ', sentence)
+    split(' ', input)
   )
 
   return {
