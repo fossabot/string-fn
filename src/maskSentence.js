@@ -1,8 +1,9 @@
 import { trim } from './trim'
-import { maskWordHelper } from './internals/maskWordHelper'
+import { maskWordHelper, maskWordHelperX } from './internals/maskWordHelper'
 import { PUNCTUATIONSX } from './internals/constants'
 
 import {
+  partialCurry,
   map,
   split,
 } from 'rambda'
@@ -15,35 +16,43 @@ const addSpaceAroundPunctuation = sentence =>
  * cases `didn't` and `по-добри` be handled
  */
 export function maskSentence({
-  charLimit = 3,
+  charLimit = 4,
   easyMode = false,
+  easierMode = false,
+  randomMode = false,
   replacer = '_',
   sentence,
   words = [],
 }){
-  const input = trim(addSpaceAroundPunctuation(sentence))
+  const parsed = trim(addSpaceAroundPunctuation(sentence))
   const hidden = []
   const visible = []
+  const input = {
+    replacer,
+    easyMode,
+    randomMode,
+    easierMode,
+    charLimit,
+  }
+  const easyFn = partialCurry(maskWordHelperX, input)
+  const ant = easierMode || easyMode ?
+    word => easyFn({ word }) :
+    word => maskWordHelper(word, replacer, charLimit)
 
   map(
-    val => {
-      let visiblePart
-      if (
+    word => {
+      const ok =
         words.length === 0 ||
-        words.includes(val)
-      ){
-        visiblePart = maskWordHelper(val, replacer, charLimit)
-        console.log({
-          val,
-          visiblePart,
-        })
-      } else {
-        visiblePart = val
-      }
-      hidden.push(val)
+        words.includes(word)
+
+      const visiblePart = ok ?
+        ant(word) :
+        word
+
+      hidden.push(word)
       visible.push(visiblePart)
     },
-    split(' ', input)
+    split(' ', parsed)
   )
 
   return {

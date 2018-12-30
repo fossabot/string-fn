@@ -2,7 +2,7 @@ import { maskSentence } from './maskSentence'
 
 test('english with apostrophe', () => {
   const sentence = 'You didn\'t, do much'
-  const expectedVisible = [ 'Y_u', 'd____t', ',', 'do', 'm__h' ]
+  const expectedVisible = [ 'Y__', 'd____t', ',', 'do', 'm__h' ]
   const expectedHidden = [ 'You', 'didn\'t', ',', 'do', 'much' ]
 
   const { hidden, visible } = maskSentence({ sentence })
@@ -36,11 +36,11 @@ test('bulgarian with dash(-)', () => {
   expect(visible).toEqual(expectedVisible)
 })
 
-test('', () => {
+test('happy', () => {
   const sentence = 'it was, for what i need, good.'
   const expectedHidden = [ 'it', 'was', ',', 'for', 'what', 'i', 'need', ',', 'good', '.' ]
 
-  const expectedVisible = [ 'it', 'w_s', ',', 'f_r', 'w__t', 'i', 'n__d', ',', 'g__d', '.' ]
+  const expectedVisible = [ 'it', 'w__', ',', 'f__', 'w__t', 'i', 'n__d', ',', 'g__d', '.' ]
 
   const { hidden, visible } = maskSentence({ sentence })
 
@@ -48,30 +48,30 @@ test('', () => {
   expect(visible).toEqual(expectedVisible)
 })
 
-test.only('easy mode, no random', () => {
-  const sentence = 'Unnecessary complexity killed the cat.'
+test('easy mode, no random', () => {
+  const sentence = 'Unnecessary complexity killed th cat.'
   const expectedHidden = [
     'Unnecessary',
     'complexity',
     'killed',
-    'the',
+    'th',
     'cat',
     '.',
   ]
   const expectedVisible = [
-    'U_______ry',
-    'c_____ty',
-    'k__ed',
-    'the',
-    'cat',
+    'Un______ary',
+    'co_____ity',
+    'k___ed',
+    'th',
+    'c__',
     '.',
   ]
   const { hidden, visible } = maskSentence({
     sentence,
     easyMode : true,
   })
-  console.log({ visible })
-  // Expect(hidden).toEqual(expectedHidden)
-  // Expect(visible).toEqual(expectedVisible)
+
+  expect(hidden).toEqual(expectedHidden)
+  expect(visible).toEqual(expectedVisible)
 })
 

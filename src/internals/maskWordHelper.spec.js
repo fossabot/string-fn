@@ -65,7 +65,7 @@ test('easy mode, random, 7 length', () => {
 
   expect(a.length).toBeGreaterThan(0)
   expect(b.length).toBeGreaterThan(0)
-  expect(b[0]).toBe(whenRandom)
+  expect(b[ 0 ]).toBe(whenRandom)
 })
 
 test('easier mode, random, 8 length', () => {
@@ -87,7 +87,7 @@ test('easier mode, random, 8 length', () => {
 
   expect(a.length).toBeGreaterThan(0)
   expect(b.length).toBeGreaterThan(0)
-  expect(b[0]).toBe(whenRandom)
+  expect(b[ 0 ]).toBe(whenRandom)
 })
 
 test('easy mode, 9 length', () => {

@@ -81,6 +81,7 @@ export function maskWordHelperX({
   easyMode = false,
   randomMode = false,
   easierMode = false,
+  charLimit = 4,
 }){
   const len = word.length
   if (len <= 2 || test(PUNCTUATIONSX, word)) return word
@@ -88,7 +89,7 @@ export function maskWordHelperX({
   if (
     !easyMode && !easierMode ||
     len <= 4
-  ) return maskWordHelper(word, replacer)
+  ) return maskWordHelper(word, replacer, charLimit)
 
   const glob = getGlob(
     len,
