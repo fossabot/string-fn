@@ -8,7 +8,7 @@ test('happy', () => {
 
 test('word is too short', () => {
   const result = maskWordHelperX({ word : 'fo' })
-  expect(result).toBe('fo')
+  expect(result).toBe('f_')
 })
 
 test('word is punctuation', () => {

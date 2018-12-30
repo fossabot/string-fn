@@ -208,8 +208,11 @@ stringFn.kebabCase('Foo Bar BAZ')
 ```
 maskSentence( {
   sentence: string,
+  easyMode: boolean = false,
+  easierMode: boolean = false,
+  randomMode: boolean = false,
   replacer: string = '_',
-  charLimit: number = 3,
+  charLimit: number = 4,
   words: string[] = []
 } )
 ```

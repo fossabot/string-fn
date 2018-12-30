@@ -63,7 +63,7 @@ export function ant(word, glob, replacer){
 export function maskWordHelper(word, replacer, charLimit = 4){
   if (
     test(PUNCTUATIONSX, word) ||
-    word.length <= 2
+    word.length <= 1
   ){
     return word
   }
@@ -84,8 +84,6 @@ export function maskWordHelperX({
   charLimit = 4,
 }){
   const len = word.length
-  if (len <= 2 || test(PUNCTUATIONSX, word)) return word
-
   if (
     !easyMode && !easierMode ||
     len <= 4

@@ -28,7 +28,10 @@ export interface MaskSentence{
   sentence: string
   replacer?: string
   charLimit?: number
-  words: string[]
+  words?: string[]
+  randomMode?: boolean
+  easyMode?: boolean
+  easierMode?: boolean
 }
 
 export interface OutputMaskSentence{
