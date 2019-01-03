@@ -21,7 +21,7 @@ console.log(camelCase('foo-bar-baz'))
 - For browser usage, the exported global is `StringFn` and the CDN link is the following:
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/string-fn/1.4.0/webVersion.js
+https://cdnjs.cloudflare.com/ajax/libs/string-fn/1.9.0/webVersion.js
 ```
 
 ## API
