@@ -36,7 +36,6 @@
     "babel-preset-env": "^1.6.1",
     "commit-message": "https://github.com/selfrefactor/commit-message#3.0.1",
     "do": "https://github.com/selfrefactor/do#1.8.4",
-    "fs-extra": "^7.0.0",
     "jest": "^22.1.0",
     "minify": "https://github.com/selfrefactor/minify#0.1.0",
     "rambda": "^1.2.6",
