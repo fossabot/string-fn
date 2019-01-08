@@ -1,7 +1,4 @@
-import {
-  map,
-  merge,
-} from 'rambda'
+import { map,merge, defaultTo} from 'rambda'
 
 function mergeAll(arr){
   let willReturn = {}
@@ -16,8 +13,10 @@ function mapToObject(fn, list){
   return mergeAll(map(fn, list))
 }
 
-export function takeArguments(url){
-  const [ , ...rawArguments ] = url.split('?')
+export function takeArguments(url, seperator){
+  const sep = defaultTo('?', seperator)
+
+  const [ , ...rawArguments ] = url.split(sep)
   if (rawArguments.length === 0) return {}
 
   return mapToObject(x => {

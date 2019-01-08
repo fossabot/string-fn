@@ -2,6 +2,19 @@ import { takeArguments } from './takeArguments'
 
 const BASE = 'https://ilearnsmarter.com/write-sentence'
 
+test('can pass separator', () => {
+  const result = takeArguments(
+    `${BASE}#alarm=5.5#foo=bar`,
+    '#'
+  )
+  const expectedResult = {
+    alarm: 5.5,
+    foo: 'bar'
+  }
+
+  expect(result).toEqual(expectedResult)
+})
+
 test('', () => {
   const result = takeArguments(BASE)
   const expectedResult = {}

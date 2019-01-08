@@ -9,7 +9,11 @@ export function shuffle(str: string): string
 export function snakeCase(str: string): string
 export function stripPunctuation(str: string): string
 export function stripTags(str: string): string
-export function takeArguments<T>(url: string): T
+export function takeArguments<T>(
+  url: string, 
+  separator?: string
+): T
+
 export function titleCase(str: string): string
 export function trim(str: string): string
 
