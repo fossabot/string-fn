@@ -4,25 +4,25 @@ const BASE = 'https://ilearnsmarter.com/write-sentence'
 
 test('can pass separator', () => {
   const result = takeArguments(
-    `${BASE}#alarm=5.5#foo=bar`,
+    `${ BASE }#alarm=5.5#foo=bar`,
     '#'
   )
   const expectedResult = {
-    alarm: 5.5,
-    foo: 'bar'
+    alarm : 5.5,
+    foo   : 'bar',
   }
 
   expect(result).toEqual(expectedResult)
 })
 
-test('', () => {
+test('initial state', () => {
   const result = takeArguments(BASE)
   const expectedResult = {}
 
   expect(result).toEqual(expectedResult)
 })
 
-test('default case with 1 argument', () => {
+test('with 1 argument', () => {
   const url = `${ BASE }?auto`
   const result = takeArguments(url)
   const expectedResult = { auto : true }
@@ -30,7 +30,23 @@ test('default case with 1 argument', () => {
   expect(result).toEqual(expectedResult)
 })
 
-test('default case with 2 arguments', () => {
+test('with 1 kebab case argument', () => {
+  const url = `${ BASE }?auto-trigger`
+  const result = takeArguments(url)
+  const expectedResult = { autoTrigger : true }
+
+  expect(result).toEqual(expectedResult)
+})
+
+test('with 1 kebab case argument and value', () => {
+  const url = `${ BASE }?auto-trigger=3`
+  const result = takeArguments(url)
+  const expectedResult = { autoTrigger : 3 }
+
+  expect(result).toEqual(expectedResult)
+})
+
+test('with 2 arguments', () => {
   const url = `${ BASE }?auto?foo`
   const result = takeArguments(url)
   const expectedResult = {
