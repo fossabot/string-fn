@@ -326,7 +326,8 @@ function takeArguments(url, seperator) {
   if (rawArguments.length === 0) return {};
 
   return mapToObject(x => {
-    const [key, value] = x.split('=');
+    const [keyRaw, value] = x.split('=');
+    const key = camelCase(keyRaw);
     if (value === undefined || value === 'true') {
       return { [key]: true };
     }
