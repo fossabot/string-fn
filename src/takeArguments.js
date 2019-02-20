@@ -1,5 +1,6 @@
 import { map, merge, defaultTo } from 'rambda'
 import { camelCase } from './camelCase'
+
 function mergeAll(arr){
   let willReturn = {}
   map(val => {
@@ -13,15 +14,13 @@ function mapToObject(fn, list){
   return mergeAll(map(fn, list))
 }
 
-export function takeArguments(url, seperator){
-  const sep = defaultTo('?', seperator)
-
+export function takeArguments(url, sep = '?', rawFlag = false){
   const [ , ...rawArguments ] = url.split(sep)
   if (rawArguments.length === 0) return {}
 
   return mapToObject(x => {
     const [ keyRaw, value ] = x.split('=')
-    const key = camelCase(keyRaw)
+    const key = rawFlag ? keyRaw : camelCase(keyRaw)
     if (value === undefined || value === 'true'){
       return { [ key ] : true }
     }

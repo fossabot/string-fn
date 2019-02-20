@@ -7,4 +7,3 @@ test('', () => {
   expect(result).not.toEqual(str)
   expect(str.length).toEqual(result.length)
 })
-

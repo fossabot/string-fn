@@ -46,6 +46,14 @@ test('with 1 kebab case argument and value', () => {
   expect(result).toEqual(expectedResult)
 })
 
+test('with raw flag', () => {
+  const url = `${ BASE }?auto_trigger=3`
+  const result = takeArguments(url, undefined, true)
+  const expectedResult = { auto_trigger : 3 }
+
+  expect(result).toEqual(expectedResult)
+})
+
 test('with 2 arguments', () => {
   const url = `${ BASE }?auto?foo`
   const result = takeArguments(url)

@@ -11,7 +11,8 @@ export function stripPunctuation(str: string): string
 export function stripTags(str: string): string
 export function takeArguments<T>(
   url: string, 
-  separator?: string
+  separator?: string,
+  rawFlag?: boolean
 ): T
 
 export function titleCase(str: string): string
