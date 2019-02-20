@@ -1,7 +1,8 @@
 import { camelCase } from './camelCase'
 
-test('', () => {
+test('happy', () => {
   expect(camelCase('foo bar BAZ')).toEqual('fooBarBaz')
+  expect(camelCase('foo-bar-baz')).toEqual('fooBarBaz')
   expect(camelCase('foo-bar-baz')).toEqual('fooBarBaz')
 })
 

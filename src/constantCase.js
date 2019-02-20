@@ -6,11 +6,9 @@ import {
   map,
 } from 'rambda'
 
-export function constantCase(x){
-  return compose(
-    join('_'),
-    map(toUpper),
-    words
-  )(x)
-}
+export const constantCase = compose(
+  join('_'),
+  map(toUpper),
+  words
+)
 
