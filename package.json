@@ -49,6 +49,9 @@
     "rambda": "^1.2.6"
   },
   "commitMessage": {
-    "workInProgress": ""
+    "workInProgress": "",
+    "feature": [
+      "method"
+    ]
   }
 }
