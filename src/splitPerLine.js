@@ -9,9 +9,24 @@ export function splitPerLine({
 }){
   let holderKeeper
   let indexKeeper
+  let carrierHolder
 
-  const predicate = (char, holder, answer, i) => {
-    const mysteryLimit = (answer.length + 1) * perLine
+  const predicate = (char, holder, answer, i, carrier) => {
+    if (carrier) carrierHolder = carrier
+
+    const mysteryLimitBase = (answer.length + 1) * perLine
+
+    const mysteryLimit = carrierHolder ?
+      mysteryLimitBase - carrierHolder :
+      mysteryLimitBase
+
+    if (i === text.length - 1){
+      return [
+        [ text.slice(indexKeeper + 1) ],
+        [],
+      ]
+    }
+
     if (char === ' ' && i + buffer < mysteryLimit){
       holderKeeper = init(holder)
       indexKeeper = i
@@ -20,9 +35,11 @@ export function splitPerLine({
     }
 
     if (i === mysteryLimit){
+
       return [
         holderKeeper,
         text.slice(indexKeeper + 1, i),
+        i - indexKeeper,
       ]
     }
 
