@@ -22,7 +22,6 @@ export function splitEveryWhen(predicate, input){
 
       holder.push(charOrAny)
     } else if (maybeAnswer){
-
       carrier = maybeAnswer[ 2 ]
       holder = [ ...maybeAnswer[ 1 ], charOrAny ]
       answer.push(maybeAnswer[ 0 ])
