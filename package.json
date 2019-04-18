@@ -49,7 +49,7 @@
     "rambda": "^1.2.6"
   },
   "commitMessage": {
-    "workInProgress": "split per line",
+    "workInProgress": "",
     "feature": [
       "method"
     ]

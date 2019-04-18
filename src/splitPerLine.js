@@ -5,7 +5,6 @@ export function splitPerLine({
   text,
   splitChar = ' ',
   perLine = 30,
-  buffer = 1,
 }){
   let holderKeeper
   let indexKeeper
@@ -29,7 +28,7 @@ export function splitPerLine({
       ]
     }
 
-    if (char === ' ' && i + buffer < mysteryLimit){
+    if (char === ' ' && i < mysteryLimit){
       holderKeeper = init(holder)
       indexKeeper = i
 
@@ -61,3 +60,4 @@ export function splitPerLine({
 
   return parsed
 }
+

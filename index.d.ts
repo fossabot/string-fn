@@ -16,7 +16,6 @@ export function reverse(str: string): string
 export function seoTitle(str: string, limit?: number): string
 export function shuffle(str: string): string
 export function snakeCase(str: string): string
-export function splitPerLine(char:string): boolean
 export function splitSentence(sentence: string): string[]
 export function stripPunctuation(str: string): string
 export function stripTags(str: string): string
@@ -24,6 +23,12 @@ export function titleCase(str: string): string
 export function trim(str: string): string
 export function words(str: string): string[]
 export function wordsX(str: string): string[]
+
+interface SplitPerLine{
+  text: string,
+  perLine?: number
+}
+export function splitPerLine(input: SplitPerLine): string[]
 
 export function takeArguments<T>(
   url: string, 

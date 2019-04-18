@@ -65,3 +65,4 @@ test('happy', () => {
     result[ 1 ]
   ).toEqual([])
 })
+
