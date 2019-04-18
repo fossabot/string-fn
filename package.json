@@ -7,6 +7,7 @@
   "module": "./dist/stringFn.esm.js",
   "scripts": {
     "test": "jest",
+    "in": "jest --watch src/splitPerLine.spec.js",
     "build": "rollup -c rollup.config.js",
     "cover": "jest --coverage",
     "docs": "docsify init ./docs"
@@ -49,7 +50,7 @@
     "rambda": "^1.2.6"
   },
   "commitMessage": {
-    "workInProgress": "rewrite split per line",
+    "workInProgress": "",
     "feature": [
       "method"
     ],

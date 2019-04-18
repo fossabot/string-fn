@@ -24,7 +24,7 @@ test('medium perLine', () => {
     text : mock,
     perLine,
   })
-  const expected = [ 'Wert 1; Wert 2,...Wert 30 sind', 'Werte, aus denen die Anzahl der', 'der Argumente errechnet wird.' ]
+  const expected = ["Wert 1; Wert 2,...Wert 30 sind", "Werte, aus denen die Anzahl der", "Argumente errechnet wird."]
 
   log(perLine, result)
   expect(result).toEqual(expected)
@@ -36,7 +36,8 @@ test('high perLine', () => {
     text : mock,
     perLine,
   })
-  const expected = [ 'Wert 1; Wert 2,...Wert 30 sind Werte, aus', 'denen die Anzahl der Argumente errechnet' ]
+  const expected = ["Wert 1; Wert 2,...Wert 30 sind Werte, aus", "denen die Anzahl der Argumente errechnet", "wird."]
+
 
   log(perLine, result)
   expect(result).toEqual(expected)
@@ -60,23 +61,24 @@ test('low perLine', () => {
     text : mock,
     perLine,
   })
-  const expected = [ 'Wert 1; Wert', '2,...Wert 30 sind', 'Werte, aus denen die', 'Anzahl der Argumente' ]
+  const expected = ["Wert 1; Wert", "2,...Wert 30 sind", "Werte, aus denen die", "Anzahl der Argumente", "errechnet wird."]
 
   log(perLine, result)
 
   expect(result).toEqual(expected)
 })
 
-test.only('custom split char', () => {
+test('custom split char', () => {
   const perLine = 22
   const result = splitPerLine({
     text      : mock,
     perLine,
     splitChar : ',',
   })
-  const expected = [ 'Wert 1; Wert', '2,...Wert 30 sind', 'Werte, aus denen die', 'Anzahl der Argumente' ]
+  const expected = [ 'Wert 1; Wert 2',
+  '...Wert 30 sind Werte',
+  ' aus denen die Anzahl der Argumente errechnet wird.' ]
 
   log(perLine, result)
-  console.log({ result })
-  // expect(result).toEqual(expected)
+  expect(result).toEqual(expected)
 })

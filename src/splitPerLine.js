@@ -1,9 +1,11 @@
+import { head } from 'rambda'
 function workingMan(partialSplitted, perLine){
   let lengthHolder = 0
   let counter = -1
   let didOverflow = false
   const willReturn = []
   const len = partialSplitted.length
+  const overTheTop = head(partialSplitted).length >= perLine
 
   while (lengthHolder < perLine && counter + 1 < len){
     counter++
@@ -13,6 +15,7 @@ function workingMan(partialSplitted, perLine){
     if (mystery > perLine){
 
       didOverflow = true
+      if(overTheTop) willReturn.push(currentInstance)
     } else {
 
       willReturn.push(currentInstance)
@@ -24,10 +27,10 @@ function workingMan(partialSplitted, perLine){
   const okCounter = counter - len + 1 === 0
 
   const isOver = didOverflow ?
-    false :
+    overTheTop :
     okCounter
 
-  const newPartialSplitted = partialSplitted.slice(counter)
+  const newPartialSplitted = partialSplitted.slice(willReturn.length)
 
   return {
     end                : isOver,
@@ -44,8 +47,9 @@ export function splitPerLine({
   const willReturn = []
   let counter = -1
   let splitted = text.split(splitChar)
-  console.log({splitted})
-  while (counter++ < splitted.length){
+  const len = splitted.length
+
+  while (counter++ < len){
     const {
       end,
       newPartialSplitted,
@@ -56,13 +60,12 @@ export function splitPerLine({
 
     if (end){
 
-      counter = splitted.length
+      counter = len
     } else {
 
       splitted = newPartialSplitted
     }
   }
-  console.log({ splitChar })
   const parsed = willReturn.map(singleAnswer => singleAnswer.join(splitChar))
 
   return parsed
