@@ -3,6 +3,7 @@ import { splitPerLine } from './splitPerLine'
 const mock = 'Wert 1; Wert 2,...Wert 30 sind Werte, aus denen die Anzahl der Argumente errechnet wird.'
 
 const log = (label, list) => list.forEach(x => {
+  // return
   console.log(label, x.length)
 })
 
@@ -13,11 +14,11 @@ test('happy', () => {
     perLine,
     buffer : 5,
   })
-  const expected = [ 'Wert 1; Wert 2,...Wert 30 sind Werte,', 'aus denen die Anzahl der Argumente', 'wird.' ]
+  const expected = ["Wert 1; Wert 2,...Wert 30 sind Werte,", "aus denen die Anzahl der Argumente", "errechnet wird."]
 
   log(perLine, result)
 
-  // expect(result).toEqual(expected)
+  expect(result).toEqual(expected)
 })
 
 test('default buffer', () => {
@@ -26,10 +27,11 @@ test('default buffer', () => {
     text : mock,
     perLine,
   })
-  const expected = [ 'Wert 1; Wert 2,...Wert 30 sind', 'Werte, aus denen die Anzahl', 'wird.' ]
+  const expected = ["Wert 1; Wert 2,...Wert 30 sind", "Werte, aus denen die Anzahl", "der Argumente errechnet wird."]
+
   log(perLine, result)
 
-  // expect(result).toEqual(expected)
+  expect(result).toEqual(expected)
 })
 
 test('high perLine', () => {
@@ -43,7 +45,7 @@ test('high perLine', () => {
     'wird.' ]
 
   log(perLine, result)
-  // expect(result).toEqual(expected)
+  expect(result).toEqual(expected)
 })
 
 test('low perLine', () => {
@@ -59,7 +61,24 @@ test('low perLine', () => {
     'errechnet wird.' ]
 
   log(perLine, result)
-  console.log({ result })
-  // expect(result).toEqual(expected)
+
+  expect(result).toEqual(expected)
 })
 
+test.only('generous buffer', () => {
+  const perLine = 23
+  const result = splitPerLine({
+    text : mock,
+    perLine,
+    buffer: 1
+  })
+  const expected = [ 'Wert 1; Wert',
+    '2,...Wert 30 sind',
+    'Werte, aus denen die',
+    'Anzahl der Argumente',
+    'errechnet wird.' ]
+
+  log(perLine, result)
+  console.log({result})
+  // expect(result).toEqual(expected)
+})

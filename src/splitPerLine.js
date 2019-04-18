@@ -19,12 +19,12 @@ export function splitPerLine({
 
     if (i === text.length - 1){
       const finalLoopResultBase = text.slice(indexKeeper + 1)
-      const finalLoopResult = holderKeeper.length === 0 ?
-        finalLoopResultBase :
-        holderKeeper.join('') + ' ' + finalLoopResultBase
+      const finalLoopResult = holderKeeper ?
+        () => holderKeeper.join('') + ' ' + finalLoopResultBase :
+        () => finalLoopResultBase
 
       return [
-        [ finalLoopResult ],
+        [ finalLoopResult() ],
         [],
       ]
     }
@@ -37,12 +37,14 @@ export function splitPerLine({
     }
 
     if (i === mysteryLimit){
-
-      return [
+      const willReturn = [
         holderKeeper,
         text.slice(indexKeeper + 1, i),
         i - indexKeeper,
       ]
+      holderKeeper = undefined
+
+      return willReturn
     }
 
     if (char === splitChar){
