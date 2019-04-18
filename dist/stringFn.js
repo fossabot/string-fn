@@ -302,35 +302,42 @@ function snakeCase(str) {
   return toLower(join('_', words(str)));
 }
 
-function splitEveryWhen(predicate, input) {
-  const answer = [];
-  let holder = [];
-  let carrier;
+function workingMan(partialSplitted, perLine) {
+  let lengthHolder = 0;
+  let counter = -1;
+  let didOverflow = false;
+  const willReturn = [];
+  const len = partialSplitted.length;
+  const overTheTop = head(partialSplitted).length >= perLine;
 
-  input.forEach((charOrAny, i) => {
-    const maybeAnswer = predicate(charOrAny, [...holder, charOrAny], answer, i, carrier);
+  while (lengthHolder < perLine && counter + 1 < len) {
+    counter++;
+    const currentInstance = partialSplitted[counter];
+    const mystery = lengthHolder + currentInstance.length + 1;
 
-    if (carrier) carrier = undefined;
+    if (mystery > perLine) {
 
-    if (maybeAnswer === true) {
+      didOverflow = true;
+      if (overTheTop) willReturn.push(currentInstance);
+    } else {
 
-      answer.push(holder);
-      holder = [];
-    } else if (maybeAnswer === false) {
-
-      holder.push(charOrAny);
-    } else if (maybeAnswer) {
-
-      carrier = maybeAnswer[2];
-      holder = [...maybeAnswer[1], charOrAny];
-      answer.push(maybeAnswer[0]);
-    } else if (input.length === i + 1) {
-
-      answer.push(holder);
+      willReturn.push(currentInstance);
     }
-  });
 
-  return answer;
+    lengthHolder = mystery;
+  }
+
+  const okCounter = counter - len + 1 === 0;
+
+  const isOver = didOverflow ? overTheTop : okCounter;
+
+  const newPartialSplitted = partialSplitted.slice(willReturn.length);
+
+  return {
+    end: isOver,
+    readyForPush: willReturn,
+    newPartialSplitted: newPartialSplitted
+  };
 }
 
 function splitPerLine({
@@ -338,48 +345,29 @@ function splitPerLine({
   splitChar = ' ',
   perLine = 30
 }) {
-  let holderKeeper;
-  let indexKeeper;
-  let carrierHolder = 0;
+  const willReturn = [];
+  let counter = -1;
+  let splitted = text.split(splitChar);
+  const len = splitted.length;
 
-  const predicate = (char, holder, answer, i, carrier) => {
-    if (carrier) carrierHolder += carrier;
+  while (counter++ < len) {
+    const {
+      end,
+      newPartialSplitted,
+      readyForPush
+    } = workingMan(splitted, perLine);
 
-    const mysteryLimitBase = (answer.length + 1) * perLine;
-    const mysteryLimit = mysteryLimitBase - carrierHolder;
+    willReturn.push(readyForPush);
 
-    if (i === text.length - 1) {
-      const finalLoopResultBase = text.slice(indexKeeper + 1);
-      const finalLoopResult = holderKeeper ? () => holderKeeper.join('') + ' ' + finalLoopResultBase : () => finalLoopResultBase;
+    if (end) {
 
-      return [[finalLoopResult()], []];
+      counter = len;
+    } else {
+
+      splitted = newPartialSplitted;
     }
-
-    if (char === ' ' && i < mysteryLimit) {
-      holderKeeper = init(holder);
-      indexKeeper = i;
-
-      return false;
-    }
-
-    if (i === mysteryLimit) {
-      const willReturn = [holderKeeper, text.slice(indexKeeper + 1, i), i - indexKeeper];
-      holderKeeper = undefined;
-
-      return willReturn;
-    }
-
-    if (char === splitChar) {
-      holderKeeper = undefined;
-
-      return true;
-    }
-
-    return false;
-  };
-
-  const result = splitEveryWhen(predicate, [...text]);
-  const parsed = result.map(singleAnswer => singleAnswer.join(''));
+  }
+  const parsed = willReturn.map(singleAnswer => singleAnswer.join(splitChar));
 
   return parsed;
 }

@@ -399,4 +399,4 @@ It is same as `words`, but for extended Latin languages(German, French, Finnish,
 
 ## Changelog
 
-2.3.0 Add `splitEvery`
+2.4.0 Add `splitPerLine`
