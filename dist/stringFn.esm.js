@@ -29,6 +29,8 @@ function count(str, substr) {
   return length(split(substr, str)) - 1;
 }
 
+const constantCase = /*#__PURE__*/compose( /*#__PURE__*/join('_'), /*#__PURE__*/map(toUpper), words);
+
 function distance(a, b) {
   if (a.length === 0) {
     return b.length;
@@ -85,6 +87,10 @@ function distanceGerman(a, b) {
   return distance(normalizeGermanWord(a), normalizeGermanWord(b));
 }
 
+function dotCase(str) {
+  return join('.', map(toLower, words(str)));
+}
+
 function glob(str, globStr) {
   const numGlobs = count(globStr, '*');
 
@@ -108,16 +114,16 @@ function indent(str, indentCount) {
   return join('\n', map(val => `${' '.repeat(indentCount)}${val}`, split('\n', str)));
 }
 
+function isLetter(char) {
+  return test(WORDS_EXTENDED, char);
+}
+
+function isPunctuation(char) {
+  return test(PUNCTUATIONS, char);
+}
+
 function kebabCase(str) {
   return toLower(join('-', words(str)));
-}
-
-function dotCase(str) {
-  return join('.', map(toLower, words(str)));
-}
-
-function pascalCase(str) {
-  return join('', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, words(str)));
 }
 
 function trim$1(str) {
@@ -247,8 +253,8 @@ function maskWords({ words, replacer = '_', charLimit = 3 }) {
   return join(' ', result);
 }
 
-function constantCase(x) {
-  return compose(join('_'), map(toUpper), words)(x);
+function pascalCase(str) {
+  return join('', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, words(str)));
 }
 
 function removeIndent(str) {
@@ -290,6 +296,88 @@ function shuffle(str) {
 
 function snakeCase(str) {
   return toLower(join('_', words(str)));
+}
+
+function splitEveryWhen(predicate, input) {
+  const answer = [];
+  let holder = [];
+  let carrier;
+
+  input.forEach((charOrAny, i) => {
+    const maybeAnswer = predicate(charOrAny, [...holder, charOrAny], answer, i, carrier);
+
+    if (carrier) carrier = undefined;
+
+    if (maybeAnswer === true) {
+
+      answer.push(holder);
+      holder = [];
+    } else if (maybeAnswer === false) {
+
+      holder.push(charOrAny);
+    } else if (maybeAnswer) {
+
+      carrier = maybeAnswer[2];
+      holder = [...maybeAnswer[1], charOrAny];
+      answer.push(maybeAnswer[0]);
+    } else if (input.length === i + 1) {
+
+      answer.push(holder);
+    }
+  });
+
+  return answer;
+}
+
+function splitPerLine({
+  text,
+  splitChar = ' ',
+  perLine = 30
+}) {
+  let holderKeeper;
+  let indexKeeper;
+  let carrierHolder = 0;
+
+  const predicate = (char, holder, answer, i, carrier) => {
+    if (carrier) carrierHolder += carrier;
+
+    const mysteryLimitBase = (answer.length + 1) * perLine;
+    const mysteryLimit = mysteryLimitBase - carrierHolder;
+
+    if (i === text.length - 1) {
+      const finalLoopResultBase = text.slice(indexKeeper + 1);
+      const finalLoopResult = holderKeeper ? () => holderKeeper.join('') + ' ' + finalLoopResultBase : () => finalLoopResultBase;
+
+      return [[finalLoopResult()], []];
+    }
+
+    if (char === ' ' && i < mysteryLimit) {
+      holderKeeper = init(holder);
+      indexKeeper = i;
+
+      return false;
+    }
+
+    if (i === mysteryLimit) {
+      const willReturn = [holderKeeper, text.slice(indexKeeper + 1, i), i - indexKeeper];
+      holderKeeper = undefined;
+
+      return willReturn;
+    }
+
+    if (char === splitChar) {
+      holderKeeper = undefined;
+
+      return true;
+    }
+
+    return false;
+  };
+
+  const result = splitEveryWhen(predicate, [...text]);
+  const parsed = result.map(singleAnswer => singleAnswer.join(''));
+
+  return parsed;
 }
 
 const addSpaceAroundPunctuation$1 = sentence => sentence.replace(PUNCTUATIONS, match$$1 => ` ${match$$1} `);
@@ -349,5 +437,5 @@ function wordsX(str) {
   return match(WORDS_EXTENDED, str);
 }
 
-export { between, camelCase, count, distance, distanceGerman, glob, indent, kebabCase, dotCase, pascalCase, maskSentence, maskWords, constantCase, removeIndent, reverse$1 as reverse, seoTitle, shuffle, snakeCase, splitSentence, stripPunctuation, stripTags, takeArguments, titleCase, trim$1 as trim, words, wordsX };
+export { between, camelCase, count, constantCase, distance, distanceGerman, dotCase, glob, indent, isLetter, isPunctuation, kebabCase, maskSentence, maskWords, pascalCase, removeIndent, reverse$1 as reverse, seoTitle, shuffle, snakeCase, splitPerLine, splitSentence, stripPunctuation, stripTags, takeArguments, titleCase, trim$1 as trim, words, wordsX };
 //# sourceMappingURL=stringFn.esm.js.map

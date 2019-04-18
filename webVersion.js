@@ -35,6 +35,8 @@
     return length(split(substr, str)) - 1;
   }
 
+  const constantCase = /*#__PURE__*/compose( /*#__PURE__*/join('_'), /*#__PURE__*/map(toUpper), words);
+
   function distance(a, b) {
     if (a.length === 0) {
       return b.length;
@@ -91,6 +93,10 @@
     return distance(normalizeGermanWord(a), normalizeGermanWord(b));
   }
 
+  function dotCase(str) {
+    return join('.', map(toLower, words(str)));
+  }
+
   function glob(str, globStr) {
     const numGlobs = count(globStr, '*');
 
@@ -114,16 +120,16 @@
     return join('\n', map(val => `${' '.repeat(indentCount)}${val}`, split('\n', str)));
   }
 
+  function isLetter(char) {
+    return test(WORDS_EXTENDED, char);
+  }
+
+  function isPunctuation(char) {
+    return test(PUNCTUATIONS, char);
+  }
+
   function kebabCase(str) {
     return toLower(join('-', words(str)));
-  }
-
-  function dotCase(str) {
-    return join('.', map(toLower, words(str)));
-  }
-
-  function pascalCase(str) {
-    return join('', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, words(str)));
   }
 
   function trim$1(str) {
@@ -253,8 +259,8 @@
     return join(' ', result);
   }
 
-  function constantCase(x) {
-    return compose(join('_'), map(toUpper), words)(x);
+  function pascalCase(str) {
+    return join('', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, words(str)));
   }
 
   function removeIndent(str) {
@@ -296,6 +302,88 @@
 
   function snakeCase(str) {
     return toLower(join('_', words(str)));
+  }
+
+  function splitEveryWhen(predicate, input) {
+    const answer = [];
+    let holder = [];
+    let carrier;
+
+    input.forEach((charOrAny, i) => {
+      const maybeAnswer = predicate(charOrAny, [...holder, charOrAny], answer, i, carrier);
+
+      if (carrier) carrier = undefined;
+
+      if (maybeAnswer === true) {
+
+        answer.push(holder);
+        holder = [];
+      } else if (maybeAnswer === false) {
+
+        holder.push(charOrAny);
+      } else if (maybeAnswer) {
+
+        carrier = maybeAnswer[2];
+        holder = [...maybeAnswer[1], charOrAny];
+        answer.push(maybeAnswer[0]);
+      } else if (input.length === i + 1) {
+
+        answer.push(holder);
+      }
+    });
+
+    return answer;
+  }
+
+  function splitPerLine({
+    text,
+    splitChar = ' ',
+    perLine = 30
+  }) {
+    let holderKeeper;
+    let indexKeeper;
+    let carrierHolder = 0;
+
+    const predicate = (char, holder, answer, i, carrier) => {
+      if (carrier) carrierHolder += carrier;
+
+      const mysteryLimitBase = (answer.length + 1) * perLine;
+      const mysteryLimit = mysteryLimitBase - carrierHolder;
+
+      if (i === text.length - 1) {
+        const finalLoopResultBase = text.slice(indexKeeper + 1);
+        const finalLoopResult = holderKeeper ? () => holderKeeper.join('') + ' ' + finalLoopResultBase : () => finalLoopResultBase;
+
+        return [[finalLoopResult()], []];
+      }
+
+      if (char === ' ' && i < mysteryLimit) {
+        holderKeeper = init(holder);
+        indexKeeper = i;
+
+        return false;
+      }
+
+      if (i === mysteryLimit) {
+        const willReturn = [holderKeeper, text.slice(indexKeeper + 1, i), i - indexKeeper];
+        holderKeeper = undefined;
+
+        return willReturn;
+      }
+
+      if (char === splitChar) {
+        holderKeeper = undefined;
+
+        return true;
+      }
+
+      return false;
+    };
+
+    const result = splitEveryWhen(predicate, [...text]);
+    const parsed = result.map(singleAnswer => singleAnswer.join(''));
+
+    return parsed;
   }
 
   const addSpaceAroundPunctuation$1 = sentence => sentence.replace(PUNCTUATIONS, match$$1 => ` ${match$$1} `);
@@ -358,21 +446,24 @@
   exports.between = between;
   exports.camelCase = camelCase;
   exports.count = count;
+  exports.constantCase = constantCase;
   exports.distance = distance;
   exports.distanceGerman = distanceGerman;
+  exports.dotCase = dotCase;
   exports.glob = glob;
   exports.indent = indent;
+  exports.isLetter = isLetter;
+  exports.isPunctuation = isPunctuation;
   exports.kebabCase = kebabCase;
-  exports.dotCase = dotCase;
-  exports.pascalCase = pascalCase;
   exports.maskSentence = maskSentence;
   exports.maskWords = maskWords;
-  exports.constantCase = constantCase;
+  exports.pascalCase = pascalCase;
   exports.removeIndent = removeIndent;
   exports.reverse = reverse$1;
   exports.seoTitle = seoTitle;
   exports.shuffle = shuffle;
   exports.snakeCase = snakeCase;
+  exports.splitPerLine = splitPerLine;
   exports.splitSentence = splitSentence;
   exports.stripPunctuation = stripPunctuation;
   exports.stripTags = stripTags;

@@ -397,3 +397,6 @@ stringFn.words('fooBarBaz')
 
 It is same as `words`, but for extended Latin languages(German, French, Finnish, etc.).
 
+## Changelog
+
+2.3.0 Add `splitEvery`

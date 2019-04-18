@@ -52,6 +52,9 @@
     "workInProgress": "",
     "feature": [
       "method"
+    ],
+    "support": [
+      "prepublish"
     ]
   }
 }
