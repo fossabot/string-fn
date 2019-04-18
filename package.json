@@ -49,7 +49,7 @@
     "rambda": "^1.2.6"
   },
   "commitMessage": {
-    "workInProgress": "",
+    "workInProgress": "rewrite split per line",
     "feature": [
       "method"
     ],

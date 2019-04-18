@@ -1,62 +1,69 @@
-import { splitEveryWhen } from './internals/splitEveryWhen'
-import { init } from 'rambda'
+function workingMan(partialSplitted, perLine){
+  let lengthHolder = 0
+  let counter = -1
+  let didOverflow = false
+  const willReturn = []
+  const len = partialSplitted.length
+
+  while (lengthHolder < perLine && counter + 1 < len){
+    counter++
+    const currentInstance = partialSplitted[ counter ]
+    const mystery = lengthHolder + currentInstance.length + 1
+
+    if (mystery > perLine){
+
+      didOverflow = true
+    } else {
+
+      willReturn.push(currentInstance)
+    }
+
+    lengthHolder = mystery
+  }
+
+  const okCounter = counter - len + 1 === 0
+
+  const isOver = didOverflow ?
+    false :
+    okCounter
+
+  const newPartialSplitted = partialSplitted.slice(counter)
+
+  return {
+    end                : isOver,
+    readyForPush       : willReturn,
+    newPartialSplitted : newPartialSplitted,
+  }
+}
 
 export function splitPerLine({
   text,
   splitChar = ' ',
   perLine = 30,
 }){
-  let holderKeeper
-  let indexKeeper
-  let carrierHolder = 0
+  const willReturn = []
+  let counter = -1
+  let splitted = text.split(splitChar)
+  console.log({splitted})
+  while (counter++ < splitted.length){
+    const {
+      end,
+      newPartialSplitted,
+      readyForPush,
+    } = workingMan(splitted, perLine)
 
-  const predicate = (char, holder, answer, i, carrier) => {
-    if (carrier) carrierHolder += carrier
+    willReturn.push(readyForPush)
 
-    const mysteryLimitBase = (answer.length + 1) * perLine
-    const mysteryLimit = mysteryLimitBase - carrierHolder
+    if (end){
 
-    if (i === text.length - 1){
-      const finalLoopResultBase = text.slice(indexKeeper + 1)
-      const finalLoopResult = holderKeeper ?
-        () => holderKeeper.join('') + ' ' + finalLoopResultBase :
-        () => finalLoopResultBase
+      counter = splitted.length
+    } else {
 
-      return [
-        [ finalLoopResult() ],
-        [],
-      ]
+      splitted = newPartialSplitted
     }
-
-    if (char === ' ' && i < mysteryLimit){
-      holderKeeper = init(holder)
-      indexKeeper = i
-
-      return false
-    }
-
-    if (i === mysteryLimit){
-      const willReturn = [
-        holderKeeper,
-        text.slice(indexKeeper + 1, i),
-        i - indexKeeper,
-      ]
-      holderKeeper = undefined
-
-      return willReturn
-    }
-
-    if (char === splitChar){
-      holderKeeper = undefined
-
-      return true
-    }
-
-    return false
   }
-
-  const result = splitEveryWhen(predicate, [ ...text ])
-  const parsed = result.map(singleAnswer => singleAnswer.join(''))
+  console.log({ splitChar })
+  const parsed = willReturn.map(singleAnswer => singleAnswer.join(splitChar))
 
   return parsed
 }

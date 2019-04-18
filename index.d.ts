@@ -25,8 +25,9 @@ export function words(str: string): string[]
 export function wordsX(str: string): string[]
 
 interface SplitPerLine{
-  text: string,
+  text: string
   perLine?: number
+  splitChar?: string
 }
 export function splitPerLine(input: SplitPerLine): string[]
 
