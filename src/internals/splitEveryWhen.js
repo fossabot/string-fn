@@ -1,7 +1,6 @@
 export function splitEveryWhen(predicate, input){
   const answer = []
   let holder = []
-  let carrier
 
   input.forEach((charOrAny, i) => {
     const maybeAnswer = predicate(
@@ -9,10 +8,7 @@ export function splitEveryWhen(predicate, input){
       [ ...holder, charOrAny ],
       answer,
       i,
-      carrier
     )
-
-    if (carrier) carrier = undefined
 
     if (maybeAnswer === true){
 
@@ -23,7 +19,6 @@ export function splitEveryWhen(predicate, input){
       holder.push(charOrAny)
     } else if (maybeAnswer){
 
-      carrier = maybeAnswer[ 2 ]
       holder = [ ...maybeAnswer[ 1 ], charOrAny ]
       answer.push(maybeAnswer[ 0 ])
     } else if (input.length === i + 1){

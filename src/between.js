@@ -1,4 +1,5 @@
 export function between(str, left, rightRaw){
+  // if(str === 2) return
   const right = rightRaw === undefined ? left : rightRaw
 
   const rightIndex = str.lastIndexOf(right)
