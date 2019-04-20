@@ -1,8 +1,8 @@
 const WORDS = /[A-Z]?[a-z]+|[A-Z]+(?![a-z])+/g
 
-export function constantCase(input){
+export function dotCase(input){
   return input
     .match(WORDS)
-    .map(x => x.toUpperCase())
-    .join('_')
+    .map(x => x.toLowerCase())
+    .join('.')
 }

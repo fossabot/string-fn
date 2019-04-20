@@ -53,7 +53,8 @@
   "commitMessage": {
     "workInProgress": "",
     "feature": [
-      "method"
+      "method",
+      "standalone"
     ],
     "support": [
       "prepublish"
