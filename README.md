@@ -399,4 +399,6 @@ It is same as `words`, but for extended Latin languages(German, French, Finnish,
 
 ## Changelog
 
+2.5.0 Add `fitWithinLines`
+
 2.4.0 Add `splitPerLine`

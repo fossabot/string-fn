@@ -32,6 +32,14 @@ interface SplitPerLine{
 }
 export function splitPerLine(input: SplitPerLine): string[]
 
+interface FitWithinLines{
+  text: string
+  perLine?: number
+  limit: number
+}
+
+export function fitWithinLines(input: FitWithinLines): string[]
+
 export function takeArguments<T>(
   url: string, 
   separator?: string,
