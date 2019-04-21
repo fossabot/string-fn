@@ -5,6 +5,7 @@
 }(this, (function (exports) { 'use strict';
 
   function between(str, left, rightRaw) {
+    // if(str === 2) return
     const right = rightRaw === undefined ? left : rightRaw;
 
     const rightIndex = str.lastIndexOf(right);
@@ -259,6 +260,64 @@
     return join(' ', result);
   }
 
+  function parseInput(inputRaw) {
+    if (typeof inputRaw !== 'string') throw new Error('inputRaw !== string');
+
+    const numbers = [];
+    const chars = [];
+    let flag = false;
+
+    inputRaw.split('').forEach(x => {
+      if (flag && x) {
+
+        chars.push(x);
+      } else if (!flag) {
+
+        const isNumber = Number(x) === Number(x);
+
+        if (isNumber) {
+
+          numbers.push(x);
+        } else {
+
+          chars.push(x);
+          flag = true;
+        }
+      } else {
+
+        flag = true;
+      }
+    });
+
+    return {
+      numbers: Number(numbers.join('')),
+      chars: chars.join('')
+    };
+  }
+
+  const hash = {
+    1: ['s', 'seconds', 'second', 'sec'],
+    60: ['m', 'minutes', 'minute', 'min'],
+    3600: ['h', 'hours', 'hour'],
+    86400: ['d', 'days', 'day']
+  };
+
+  function findInHash(hashKey) {
+    const [found] = Object.keys(hash).filter(singleKey => hash[singleKey].includes(hashKey));
+
+    if (!found) throw new Error('no numbers passed to `ms`');
+
+    return found;
+  }
+
+  function ms(inputRaw) {
+    const input = parseInput(inputRaw);
+
+    const miliseconds = findInHash(input.chars);
+
+    return Math.floor(Number(miliseconds) * 1000 * input.numbers);
+  }
+
   function pascalCase(str) {
     return join('', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, words(str)));
   }
@@ -445,6 +504,7 @@
   exports.kebabCase = kebabCase;
   exports.maskSentence = maskSentence;
   exports.maskWords = maskWords;
+  exports.ms = ms;
   exports.pascalCase = pascalCase;
   exports.removeIndent = removeIndent;
   exports.reverse = reverse$1;

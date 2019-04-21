@@ -1,4 +1,5 @@
 function between(str, left, rightRaw) {
+  // if(str === 2) return
   const right = rightRaw === undefined ? left : rightRaw;
 
   const rightIndex = str.lastIndexOf(right);
@@ -253,6 +254,64 @@ function maskWords({ words, replacer = '_', charLimit = 3 }) {
   return join(' ', result);
 }
 
+function parseInput(inputRaw) {
+  if (typeof inputRaw !== 'string') throw new Error('inputRaw !== string');
+
+  const numbers = [];
+  const chars = [];
+  let flag = false;
+
+  inputRaw.split('').forEach(x => {
+    if (flag && x) {
+
+      chars.push(x);
+    } else if (!flag) {
+
+      const isNumber = Number(x) === Number(x);
+
+      if (isNumber) {
+
+        numbers.push(x);
+      } else {
+
+        chars.push(x);
+        flag = true;
+      }
+    } else {
+
+      flag = true;
+    }
+  });
+
+  return {
+    numbers: Number(numbers.join('')),
+    chars: chars.join('')
+  };
+}
+
+const hash = {
+  1: ['s', 'seconds', 'second', 'sec'],
+  60: ['m', 'minutes', 'minute', 'min'],
+  3600: ['h', 'hours', 'hour'],
+  86400: ['d', 'days', 'day']
+};
+
+function findInHash(hashKey) {
+  const [found] = Object.keys(hash).filter(singleKey => hash[singleKey].includes(hashKey));
+
+  if (!found) throw new Error('no numbers passed to `ms`');
+
+  return found;
+}
+
+function ms(inputRaw) {
+  const input = parseInput(inputRaw);
+
+  const miliseconds = findInHash(input.chars);
+
+  return Math.floor(Number(miliseconds) * 1000 * input.numbers);
+}
+
 function pascalCase(str) {
   return join('', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, words(str)));
 }
@@ -425,5 +484,5 @@ function wordsX(str) {
   return match(WORDS_EXTENDED, str);
 }
 
-export { between, camelCase, count, constantCase, distance, distanceGerman, dotCase, glob, indent, isLetter, isPunctuation, kebabCase, maskSentence, maskWords, pascalCase, removeIndent, reverse$1 as reverse, seoTitle, shuffle, snakeCase, splitPerLine, splitSentence, stripPunctuation, stripTags, takeArguments, titleCase, trim$1 as trim, words, wordsX };
+export { between, camelCase, count, constantCase, distance, distanceGerman, dotCase, glob, indent, isLetter, isPunctuation, kebabCase, maskSentence, maskWords, ms, pascalCase, removeIndent, reverse$1 as reverse, seoTitle, shuffle, snakeCase, splitPerLine, splitSentence, stripPunctuation, stripTags, takeArguments, titleCase, trim$1 as trim, words, wordsX };
 //# sourceMappingURL=stringFn.esm.js.map
