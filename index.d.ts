@@ -10,6 +10,7 @@ export function indent(str:string, indentCount:number): string
 export function isLetter(char:string): boolean
 export function isPunctuation(char:string): boolean
 export function kebabCase(str: string): string
+export function ms(input: string): number
 export function pascalCase(str: string): string
 export function removeIndent(str: string): string
 export function reverse(str: string): string
