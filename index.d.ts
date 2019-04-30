@@ -24,7 +24,7 @@ export function titleCase(str: string): string
 export function trim(str: string): string
 export function words(str: string): string[]
 export function wordsX(str: string): string[]
-export function getMaxLength(string[]): number
+export function getMaxLength(listOfSentences: string[]): number
 
 interface SplitPerLine{
   text: string
