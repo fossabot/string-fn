@@ -20,8 +20,14 @@ function words(str) {
   return match(WORDS, str);
 }
 
-function camelCase(str) {
-  const result = join('', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, words(str)));
+function wordsX(str) {
+  return match(WORDS_EXTENDED, str);
+}
+
+function camelCase(str, extraLatin = false) {
+  const method = extraLatin ? wordsX : words;
+
+  const result = join('', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, method(str)));
 
   return `${toLower(head(result))}${tail(result)}`;
 }
@@ -30,7 +36,11 @@ function count(str, substr) {
   return length(split(substr, str)) - 1;
 }
 
-const constantCase = /*#__PURE__*/compose( /*#__PURE__*/join('_'), /*#__PURE__*/map(toUpper), words);
+const constantCase = (str, extraLatin = false) => {
+  const method = extraLatin ? wordsX : words;
+
+  return compose(join('_'), map(toUpper), method)(str);
+};
 
 function distance(a, b) {
   if (a.length === 0) {
@@ -88,8 +98,10 @@ function distanceGerman(a, b) {
   return distance(normalizeGermanWord(a), normalizeGermanWord(b));
 }
 
-function dotCase(str) {
-  return join('.', map(toLower, words(str)));
+function dotCase(str, extraLatin = false) {
+  const method = extraLatin ? wordsX : words;
+
+  return join('.', map(toLower, method(str)));
 }
 
 function glob(str, globStr) {
@@ -123,8 +135,10 @@ function isPunctuation(char) {
   return test$1(PUNCTUATIONS, char);
 }
 
-function kebabCase(str) {
-  return toLower(join('-', words(str)));
+function kebabCase(str, extraLatin = false) {
+  const method = extraLatin ? wordsX : words;
+
+  return toLower(join('-', method(str)));
 }
 
 function trim$1(str) {
@@ -312,8 +326,10 @@ function ms(inputRaw) {
   return Math.floor(Number(miliseconds) * 1000 * input.numbers);
 }
 
-function pascalCase(str) {
-  return join('', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, words(str)));
+function pascalCase(str, extraLatin = false) {
+  const method = extraLatin ? wordsX : words;
+
+  return join('', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, method(str)));
 }
 
 function removeIndent(str) {
@@ -353,8 +369,10 @@ function shuffle(str) {
   return join('', shuffleArr(split('', str)));
 }
 
-function snakeCase(str) {
-  return toLower(join('_', words(str)));
+function snakeCase(str, extraLatin = false) {
+  const method = extraLatin ? wordsX : words;
+
+  return toLower(join('_', method(str)));
 }
 
 function workingMan(partialSplitted, perLine) {
@@ -1351,12 +1369,10 @@ function takeArguments(url, sep = '?', rawFlag = false) {
   }, rawArguments);
 }
 
-function titleCase(str) {
-  return join(' ', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, words(str)));
-}
+function titleCase(str, extraLatin = false) {
+  const method = extraLatin ? wordsX : words;
 
-function wordsX(str) {
-  return match(WORDS_EXTENDED, str);
+  return join(' ', map(val => `${toUpper(head(val))}${toLower(tail(val))}`, method(str)));
 }
 
 export { between, camelCase, count, constantCase, distance, distanceGerman, dotCase, glob, indent, isLetter, isPunctuation, kebabCase, maskSentence, maskWords, ms, pascalCase, removeIndent, reverse$1 as reverse, seoTitle, shuffle, snakeCase, splitPerLine, splitSentence, stripPunctuation, getMaxLength, fitWithinLines, stripTags, takeArguments, titleCase, trim$1 as trim, words, wordsX };
