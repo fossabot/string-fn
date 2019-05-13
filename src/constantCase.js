@@ -5,10 +5,17 @@ import {
   join,
   map,
 } from 'rambda'
+import { wordsX } from './wordsX'
+  
+export const constantCase = (str, extraLatin = false) => {
+  const method = extraLatin ?
+    wordsX :
+    words
 
-export const constantCase = compose(
-  join('_'),
-  map(toUpper),
-  words
-)
+  return compose(
+   join('_'),
+   map(toUpper),
+   method
+ )(str)
+}
 

@@ -24,3 +24,9 @@ test('', () => {
   expect(result).toEqual('foo-bar-baz')
 })
 
+test('', () => {
+  const result = kebabCase('Foo Stören BAZ', true)
+
+  expect(result).toEqual('foo-stören-baz')
+})
+

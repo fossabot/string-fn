@@ -11,3 +11,7 @@ test('should work as camelcase library', () => {
   expect(camelCase('--foo.bar')).toEqual('fooBar')
   expect(camelCase('Foo-Bar')).toEqual('fooBar')
 })
+
+test('extra latin', () => {
+  expect(camelCase('foo-Stören.bar', true)).toEqual('fooStörenBar')
+})

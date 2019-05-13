@@ -15,3 +15,11 @@ test('', () => {
 
   expect(result).toEqual(expectedResult)
 })
+
+test('extra latin', () => {
+  const str = 'fooStören_BAZ'
+  const result = titleCase(str, true)
+  const expectedResult = 'Foo Stören Baz'
+
+  expect(result).toEqual(expectedResult)
+})

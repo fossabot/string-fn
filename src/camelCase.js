@@ -8,13 +8,18 @@ import {
 } from 'rambda'
 
 import { words } from './words'
+import { wordsX } from './wordsX'
 
-export function camelCase(str){
+export function camelCase(str, extraLatin = false){
+  const method = extraLatin ?
+    wordsX :
+    words
+
   const result = join(
     '',
     map(
       val => `${ toUpper(head(val)) }${ toLower(tail(val)) }`,
-      words(str)
+      method(str)
     )
   )
 
