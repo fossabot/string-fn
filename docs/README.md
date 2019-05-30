@@ -21,7 +21,7 @@ console.log(camelCase('foo-bar-baz'))
 - For browser usage, the exported global is `StringFn` and the CDN link is the following:
 
 ```
-https://cdnjs.cloudflare.com/ajax/libs/string-fn/1.4.0/webVersion.js
+https://cdnjs.cloudflare.com/ajax/libs/string-fn/1.9.0/webVersion.js
 ```
 
 ## API
@@ -208,8 +208,11 @@ stringFn.kebabCase('Foo Bar BAZ')
 ```
 maskSentence( {
   sentence: string,
+  easyMode: boolean = false,
+  easierMode: boolean = false,
+  randomMode: boolean = false,
   replacer: string = '_',
-  charLimit: number = 3,
+  charLimit: number = 4,
   words: string[] = []
 } )
 ```
@@ -394,3 +397,10 @@ stringFn.words('fooBarBaz')
 
 It is same as `words`, but for extended Latin languages(German, French, Finnish, etc.).
 
+## Changelog
+
+2.7.0 Support extra latin
+
+2.6.0 Add `fitWithinLines`
+
+2.4.0 Add `splitPerLine`
