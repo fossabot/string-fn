@@ -1,6 +1,7 @@
 [![CircleCI](https://img.shields.io/circleci/project/github/selfrefactor/string-fn.svg)](https://circleci.com/gh/selfrefactor/string-fn)
 [![codecov](https://codecov.io/gh/selfrefactor/string-fn/branch/master/graph/badge.svg)](https://codecov.io/gh/selfrefactor/string-fn)
 [![CDNJS](https://img.shields.io/cdnjs/v/string-fn.svg)](https://cdnjs.com/libraries/string-fn)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fselfrefactor%2Fstring-fn.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fselfrefactor%2Fstring-fn?ref=badge_shield)
 
 # String-fn
 
@@ -404,3 +405,6 @@ It is same as `words`, but for extended Latin languages(German, French, Finnish,
 2.6.0 Add `fitWithinLines`
 
 2.4.0 Add `splitPerLine`
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fselfrefactor%2Fstring-fn.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fselfrefactor%2Fstring-fn?ref=badge_large)
